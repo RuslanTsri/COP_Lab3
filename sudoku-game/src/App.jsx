@@ -7,10 +7,9 @@ import './styles/main.css';
 
 function App() {
     const [page, setPage] = useState('start');
-    //стан для зберігання обраної складності
     const [settings, setSettings] = useGameSettings();
 
-    const handleGameStart = (selectedDifficulty) => {
+    const handleGameStart = (newSettings) => {
         setSettings(newSettings);
         setPage('game');
     };
@@ -18,13 +17,13 @@ function App() {
     const renderCurrentPage = () => {
         switch (page) {
             case 'game':
-
                 return <GamePage settings={settings} onGameEnd={() => setPage('results')} />;
             case 'results':
                 return <ResultsPage onRestart={() => setPage('start')} />;
             case 'start':
             default:
-                return <StartPage onGameStart={handleGameStart} />;
+
+                return <StartPage onGameStart={handleGameStart} defaultSettings={settings} />;
         }
     };
 
